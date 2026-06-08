@@ -26,7 +26,7 @@ BarrierSyncProblem/
 
 ## How to Compile and Run
 
-This is a legacy Eclipse project with no Maven or Gradle, so compilation is done manually. Navigate to the `BarrierSyncProblem` folder first, then run:
+This is a legacy Eclipse project with no Maven or Gradle, so compilation is done manually. Navigate to the BarrierSyncProblem folder first, then run:
 
 ### Compile
 
@@ -51,7 +51,7 @@ java -cp "bin" edu.eci.arsw.samples.Main
 
 ### 1a. What result does the original program produce? Is it correct? Why?
 
-The result is wrong. The average prints as `0` before the threads even start their work because `Main.java` calls `getResultado()` immediately after `start()`, without waiting for the threads to finish. Since `resultado` has not been written yet, every value is `0`.
+The result is wrong. The average prints as 0 before the threads even start their work because Main.java calls getResultado() immediately after start(), without waiting for the threads to finish. Since resultado has not been written yet, every value is 0.
 
 ![NoSol](images/NoSol.png)
 
@@ -59,13 +59,13 @@ The result is wrong. The average prints as `0` before the threads even start the
 
 ### 3. Barrier Synchronization Strategy Applied
 
-The solution uses `CyclicBarrier` from `java.util.concurrent`. Each thread calls `barrier.await()` after finishing its work. All threads block at that point until the last one arrives — at that moment the barrier executes its action, which calculates and prints the average.
+The solution uses CyclicBarrier from java.util.concurrent. Each thread calls barrier.await() after finishing its work. All threads block at that point until the last one arrives — at that moment the barrier executes its action, which calculates and prints the average.
 
-`HiloProc.java` — the thread receives the barrier and calls `await()` at the end of `run()`:
+HiloProc.java — the thread receives the barrier and calls await() at the end of run():
 
 ![HiloProc](images/HiloProc.png)
 
-`Main.java` — the barrier is created with N threads and a barrier action:
+Main.java — the barrier is created with N threads and a barrier action:
 
 ![Main](images/Main.png)
 
